@@ -225,7 +225,7 @@ namespace server.Services
             };
         }
 
-        public async Task<ServiceResponse> ToggleAdminActiveStatus(int adminId, int authUserId)
+        public async Task<ServiceResponse> DeactivateAdminAccount(int adminId, int authUserId)
         {
             if (adminId == authUserId)
             {
@@ -248,16 +248,14 @@ namespace server.Services
                 };
             }
 
-            bool newActiveStatus = !targetAdmin.Account!.IsActive;
-            targetAdmin.Account!.IsActive = newActiveStatus;
-
+            targetAdmin.Account!.IsActive = false;
             await _adminRepo.UpdateAdmin(targetAdmin);
 
             return new ServiceResponse
             {
                 Status = ResStatusCode.OK,
                 Success = true,
-                Message = newActiveStatus ? SuccessMessage.REACTIVATE_ACCOUNT_SUCCESSFULLY : SuccessMessage.DEACTIVATE_ACCOUNT_SUCCESSFULLY,
+                Message = SuccessMessage.DEACTIVATE_ACCOUNT_SUCCESSFULLY,
             };
         }
     }

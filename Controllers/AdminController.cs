@@ -93,12 +93,12 @@ namespace server.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("toggle-active/{adminId:int}")]
-        public async Task<IActionResult> ToggleAdminActiveStatus([FromRoute] int adminId)
+        [HttpPost("deactivate-admin/{adminId:int}")]
+        public async Task<IActionResult> DeactivateAdminAccount([FromRoute] int adminId)
         {
             var authUserId = HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
-            var result = await _userService.ToggleAdminActiveStatus(adminId, int.Parse(authUserId!));
+            var result = await _userService.DeactivateAdminAccount(adminId, int.Parse(authUserId!));
             if (!result.Success)
             {
                 return StatusCode(result.Status, new ErrorResponseDto { Message = result.Message });

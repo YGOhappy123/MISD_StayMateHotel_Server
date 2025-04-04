@@ -17,6 +17,6 @@ namespace server.Interfaces.Services
         Task<ServiceResponse<List<Admin>>> GetAllAdmins(BaseQueryObject queryObject);
         Task<ServiceResponse> CreateNewAdmin(CreateAdminDto createAdminDto, int authUserId);
         Task<ServiceResponse> UpdateAdminProfile(UpdateAdminDto updateAdminDto, int adminId);
-        Task<ServiceResponse> ToggleAdminActiveStatus(int adminId, int authUserId);
+        Task<ServiceResponse> DeactivateAdminAccount(int adminId, int authUserId);
     }
 }
